@@ -7,8 +7,8 @@ type NavProps = {
 }
 
 export const Nav = ({ onSearch } : NavProps) => {
-    const [searchTerm, ] = useState('')
-    const debouncedSearchTerm = useDebounce(searchTerm, 500)
+    const [query, setQuery] = useState('')
+    const debouncedSearchTerm = useDebounce(query, 1000)
 
     useEffect(() => {
         if (debouncedSearchTerm) {
@@ -18,7 +18,7 @@ export const Nav = ({ onSearch } : NavProps) => {
 
     return (
         <nav className='nav'>
-            <input type="text" className='search-input' onChange={(e) => onSearch(e.target.value)} placeholder='search' />
+            <input type="text" className='search-input' onChange={(e) => setQuery(e.target.value)} placeholder='search' />
         </nav>
     )
 }

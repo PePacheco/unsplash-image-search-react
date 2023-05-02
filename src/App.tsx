@@ -6,7 +6,7 @@ import { Image } from './components/ImagesList/ImageList'
 
 function App() {
     const [query, setQuery] = useState('dog')
-    const [data, setData] = useState<Image[]>([])
+    const [images, setImages] = useState<Image[]>([])
 
     const handleRequest = useCallback(async () => {
         if (query) {
@@ -22,15 +22,15 @@ function App() {
     }, [query])
 
     useEffect(() => {
-        handleRequest().then((data) => {
-            setData(data.results.map((result: any) => ({id: result.id, url:result.urls.regular}) as Image))
+        handleRequest().then((images) => {
+            setImages(images.results.map((result: any) => ({id: result.id, url:result.urls.regular}) as Image))
         })
     }, [handleRequest])
 
     return (
         <>
             <Nav onSearch={setQuery} />
-            <ImageList images={data} />
+            <ImageList images={images} />
         </>
     )
 }
